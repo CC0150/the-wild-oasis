@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-const eslintPlugin = await import("vite-plugin-eslint").then((m) => m.default);
+
+import eslintPlugin from "vite-plugin-eslint";
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), eslintPlugin()],
