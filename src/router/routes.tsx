@@ -1,25 +1,29 @@
 import { Navigate } from "react-router";
+import { lazy } from "react";
+import PageLoader from "@/components/pageLoader/PageLoader";
 
-import AppLayout from "@/pages/AppLayout";
-import Dashboard from "@/pages/Dashboard";
-import Settings from "@/pages/Settings";
-import Users from "@/pages/Users";
-import PageNotFound from "@/pages/PageNotFound";
-import Bookings from "@/pages/Bookings";
-import Cabins from "@/pages/Cabins";
-import Account from "@/pages/Account";
-import Login from "@/pages/Login";
-import Booking from "@/pages/Booking";
-import Checkin from "@/pages/Checkin";
-import ProtectedRoute from "@/pages/ProtectedRoute";
+const Login = lazy(() => import("@/pages/Login"));
+const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const Users = lazy(() => import("@/pages/Users"));
+const Settings = lazy(() => import("@/pages/Settings"));
+const Bookings = lazy(() => import("@/pages/Bookings"));
+const Cabins = lazy(() => import("@/pages/Cabins"));
+const Account = lazy(() => import("@/pages/Account"));
+const Booking = lazy(() => import("@/pages/Booking"));
+const Checkin = lazy(() => import("@/pages/Checkin"));
+const ProtectedRoute = lazy(() => import("@/pages/ProtectedRoute"));
+const AppLayout = lazy(() => import("@/pages/AppLayout"));
+const PageNotFound = lazy(() => import("@/pages/PageNotFound"));
 
 const routes = [
   {
     path: "/",
     element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
+      <PageLoader>
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
+      </PageLoader>
     ),
     children: [
       {
@@ -28,46 +32,86 @@ const routes = [
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PageLoader>
+            <Dashboard />
+          </PageLoader>
+        ),
       },
       {
         path: "/users",
-        element: <Users />,
+        element: (
+          <PageLoader>
+            <Users />
+          </PageLoader>
+        ),
       },
       {
         path: "/settings",
-        element: <Settings />,
+        element: (
+          <PageLoader>
+            <Settings />
+          </PageLoader>
+        ),
       },
 
       {
         path: "/bookings",
-        element: <Bookings />,
+        element: (
+          <PageLoader>
+            <Bookings />
+          </PageLoader>
+        ),
       },
       {
         path: "/bookings/:bookingId",
-        element: <Booking />,
+        element: (
+          <PageLoader>
+            <Booking />
+          </PageLoader>
+        ),
       },
       {
         path: "/checkin/:bookingId",
-        element: <Checkin />,
+        element: (
+          <PageLoader>
+            <Checkin />
+          </PageLoader>
+        ),
       },
       {
         path: "/cabins",
-        element: <Cabins />,
+        element: (
+          <PageLoader>
+            <Cabins />
+          </PageLoader>
+        ),
       },
       {
         path: "/account",
-        element: <Account />,
+        element: (
+          <PageLoader>
+            <Account />
+          </PageLoader>
+        ),
       },
     ],
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PageLoader>
+        <Login />
+      </PageLoader>
+    ),
   },
   {
     path: "*",
-    element: <PageNotFound />,
+    element: (
+      <PageLoader>
+        <PageNotFound />
+      </PageLoader>
+    ),
   },
 ];
 
