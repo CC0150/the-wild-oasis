@@ -76,7 +76,14 @@ const BookingDetail: React.FC = () => {
         )}
 
         {status === "checked-in" && (
-          <Button onClick={() => checkOut(bookingId)} disabled={isCheckingOut}>
+          <Button
+            onClick={() =>
+              checkOut(bookingId, {
+                onSettled: () => navigate(-1),
+              })
+            }
+            disabled={isCheckingOut}
+          >
             Check-out
           </Button>
         )}
