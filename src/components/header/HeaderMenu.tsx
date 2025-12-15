@@ -1,20 +1,14 @@
-import styled from "styled-components";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { HiOutlineUser, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import LogOut from "../authentication/LogOut";
 import { useNavigate } from "react-router";
 import DarkModeToggle from "@/ui/DarkModeToggle";
-import AiChatWindow from "../ai/AiChatWindow";
+import { StyledHeaderMenu, MenuItem, LoadingWrapper } from "./style";
+import Spinner from "@/ui/Spinner";
 
-const StyledHeaderMenu = styled.ul`
-  display: flex;
-  gap: 0.4rem;
-`;
-
-const MenuItem = styled.li`
-  position: relative;
-`;
+// 使用 lazy 动态导入 AI 聊天组件
+const AIChatWindow = lazy(() => import("../ai/AiChatWindow"));
 
 const HeaderMenu: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +25,19 @@ const HeaderMenu: React.FC = () => {
         <ButtonIcon onClick={() => setIsChatOpen((open) => !open)}>
           <HiOutlineChatBubbleLeftRight />
         </ButtonIcon>
-        {isChatOpen && <AiChatWindow onClose={() => setIsChatOpen(false)} />}
+
+        {/* 使用 Suspense 包裹懒加载组件 */}
+        {isChatOpen && (
+          <Suspense
+            fallback={
+              <LoadingWrapper>
+                <Spinner />
+              </LoadingWrapper>
+            }
+          >
+            <AIChatWindow onClose={() => setIsChatOpen(false)} />
+          </Suspense>
+        )}
       </MenuItem>
 
       <li>
