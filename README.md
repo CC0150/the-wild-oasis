@@ -198,7 +198,7 @@ The Wild Oasis 是一个采用 React 和 TypeScript 构建的全栈酒店管理�
 1. **克隆项目**
 
    ```bash
-   git clone https://github.com/your-username/the-wild-oasis.git
+   git clone https://github.com/CC0150/the-wild-oasis.git
    cd the-wild-oasis
    ```
 
